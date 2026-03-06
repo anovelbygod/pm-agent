@@ -576,7 +576,15 @@
       </div>
       <textarea id="inputText" placeholder="e.g. A feature that lets merchants bulk export their transaction history as a CSV file..."></textarea>
       <div class="api-section">
-        <div class="api-label">Anthropic API Key</div>
+        <div class="api-label-row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div class="api-label" style="margin-bottom:0">Anthropic API Key</div>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <span style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.5px;">REMEMBER</span>
+            <div class="toggle" id="rememberToggle" onclick="toggleRemember()" style="width:32px;height:18px;background:var(--border);border-radius:20px;position:relative;transition:background 0.2s;cursor:pointer;">
+              <div id="toggleThumb" style="width:12px;height:12px;background:var(--muted);border-radius:50%;position:absolute;top:3px;left:3px;transition:all 0.2s;"></div>
+            </div>
+          </label>
+        </div>
         <div class="api-row">
           <input
             type="password"
@@ -614,6 +622,57 @@
 <div class="toast" id="toast"></div>
 
 <script>
+  // Remember API key
+  let rememberKey = false;
+
+  function initRemember() {
+    const saved = localStorage.getItem('pm_agent_remember');
+    const savedKey = localStorage.getItem('pm_agent_key');
+    if (saved === 'true' && savedKey) {
+      rememberKey = true;
+      document.getElementById('apiKey').value = savedKey;
+      setToggleState(true);
+    }
+  }
+
+  function toggleRemember() {
+    rememberKey = !rememberKey;
+    setToggleState(rememberKey);
+    if (rememberKey) {
+      const key = document.getElementById('apiKey').value.trim();
+      if (key) {
+        localStorage.setItem('pm_agent_key', key);
+        localStorage.setItem('pm_agent_remember', 'true');
+        showToast('✓ Key saved to this device');
+      } else {
+        showToast('⚠️ Add your key first, then enable remember');
+        rememberKey = false;
+        setToggleState(false);
+      }
+    } else {
+      localStorage.removeItem('pm_agent_key');
+      localStorage.removeItem('pm_agent_remember');
+      showToast('Key removed from device');
+    }
+  }
+
+  function setToggleState(on) {
+    const toggle = document.getElementById('rememberToggle');
+    const thumb = document.getElementById('toggleThumb');
+    toggle.style.background = on ? 'var(--accent)' : 'var(--border)';
+    thumb.style.background = on ? '#0A0A0F' : 'var(--muted)';
+    thumb.style.left = on ? '17px' : '3px';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    initRemember();
+    document.getElementById('apiKey').addEventListener('input', () => {
+      if (rememberKey) {
+        localStorage.setItem('pm_agent_key', document.getElementById('apiKey').value);
+      }
+    });
+  });
+
   const modes = {
     prd: {
       description: "Describe your product idea or feature in plain English. One sentence is enough to generate a full PRD.",
