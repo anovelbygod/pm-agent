@@ -841,21 +841,15 @@ Be honest and thorough. Surface the uncomfortable risks.`
     document.getElementById('downloadBtn').disabled = true;
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('/.netlify/functions/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-client-side-api-key-allowance': 'my-product-is-not-for-others'
+          'x-api-key': apiKey
         },
         body: JSON.stringify({
-          model: 'claude-haiku-4-5-20251001',
-          max_tokens: 2000,
-          messages: [{
-            role: 'user',
-            content: modes[currentMode].prompt(input)
-          }]
+          prompt: modes[currentMode].prompt(input),
+          model: 'claude-haiku-4-5-20251001'
         })
       });
 
