@@ -827,7 +827,7 @@
     document.getElementById('outputStatus').textContent = 'Generating';
 
     scroll.innerHTML = `<div class="loading"><div class="loading-gem"></div><div class="loading-text">crafting documentation</div></div>`;
-    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = true);
+    outputBtns.forEach(id => document.getElementById(id).disabled = true);
 
     try {
       const res = await fetch('/.netlify/functions/generate', {
@@ -850,7 +850,7 @@
       document.getElementById('wordCount').textContent = words + ' words';
       document.getElementById('outputStatus').textContent = 'Ready';
 
-      ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = false);
+      outputBtns.forEach(id => document.getElementById(id).disabled = false);
       currentView = 'rendered';
       document.getElementById('viewBtn').classList.add('active');
       document.getElementById('editBtn').classList.remove('active');
@@ -924,7 +924,7 @@
     document.getElementById('outputDot').classList.remove('live');
     document.getElementById('outputStatus').textContent = 'Waiting';
     document.getElementById('wordCount').textContent = '';
-    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = true);
+    outputBtns.forEach(id => document.getElementById(id).disabled = true);
     document.getElementById('viewBtn').classList.add('active');
     document.getElementById('editBtn').classList.remove('active');
     currentView = 'rendered';
@@ -935,6 +935,9 @@
     t.textContent = msg; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
+  // ── Output button IDs ─────────────────────────────────────────────
+const outputBtns = ['copyBtn', 'dlBtn', 'clearBtn', 'viewBtn', 'editBtn'];
+
 // ── Button state ──────────────────────────────────────────────────
 function updateButtonState() {
   const value = document.getElementById('inputText').value.trim();
