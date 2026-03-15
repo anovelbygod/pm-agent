@@ -1,0 +1,9 @@
+{
+    "name": "arcspect",
+    "version": "2.0.0",
+    "description": "AI-powered product documentation tool",
+    "dependencies": {
+      "docx": "^8.5.0",
+      "pdfkit": "^0.15.0"
+    }
+  }

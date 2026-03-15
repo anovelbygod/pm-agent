@@ -1030,7 +1030,9 @@
       <textarea class="output-editable" id="outputEditable"></textarea>
       <div class="output-actions">
         <button class="act-btn" id="copyBtn" onclick="copyOutput()" disabled>Copy</button>
-        <button class="act-btn" id="dlBtn" onclick="downloadOutput()" disabled>Download section</button>
+        <button class="act-btn" id="dlBtn" onclick="downloadOutput()" disabled>↓ .md</button>
+        <button class="act-btn" id="dlDocxBtn" onclick="exportDocx()" disabled>↓ .docx</button>
+        <button class="act-btn" id="dlPdfBtn" onclick="exportPdf()" disabled>↓ .pdf</button>
         <button class="act-btn act-btn-clear" id="clearBtn" onclick="clearOutput()" disabled>Clear</button>
         <button class="act-btn act-btn-brief" id="briefBtn" onclick="openBriefModal()" disabled>
           Download full brief <span class="brief-count" id="briefCount">0</span>
@@ -1279,7 +1281,7 @@
     document.getElementById('outputDot').classList.add('live');
     document.getElementById('outputStatus').textContent = 'Generating';
     scroll.innerHTML = `<div class="loading"><div class="loading-gem"></div><div class="loading-text">crafting ${modeNames[mode].toLowerCase()}</div></div>`;
-    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn','briefBtn'].forEach(id => document.getElementById(id).disabled = true);
+    ['copyBtn','dlBtn','dlDocxBtn','dlPdfBtn','clearBtn','viewBtn','editBtn','briefBtn'].forEach(id => document.getElementById(id).disabled = true);
     updateStatusTabs(mode);
 
     try {
@@ -1327,7 +1329,7 @@
     scroll.style.display = 'block'; editable.style.display = 'none';
     editable.value = text;
     document.getElementById('wordCount').textContent = words + ' words';
-    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = false);
+    ['copyBtn','dlBtn','dlDocxBtn','dlPdfBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = false);
     updateBriefCount();
     currentView = 'rendered';
     document.getElementById('viewBtn').classList.add('active');
@@ -1340,7 +1342,7 @@
     document.getElementById('wordCount').textContent = '';
     document.getElementById('outputStatus').textContent = 'Waiting';
     document.getElementById('outputDot').classList.remove('live');
-    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = true);
+    ['copyBtn','dlBtn','dlDocxBtn','dlPdfBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = true);
   }
 
   // ── Generate (main button) ────────────────────────────────────────
@@ -1534,6 +1536,51 @@ Be precise. Only include real, named companies. Surface uncomfortable truths abo
     const a = document.createElement('a');
     a.href = url; a.download = `Arcspect-${n[currentMode]}-${Date.now()}.md`; a.click();
     URL.revokeObjectURL(url); toast('✓ Downloaded');
+  }
+
+  async function exportDocx() {
+    const o = latest(); if (!o) return;
+    const key = document.getElementById('apiKey').value.trim();
+    const btn = document.getElementById('dlDocxBtn');
+    const n = { prd:'PRD', stories:'User-Stories', criteria:'Acceptance-Criteria', metrics:'Success-Metrics', risks:'Risks-Assumptions' };
+    btn.disabled = true; btn.textContent = 'Exporting...';
+    try {
+      const res = await fetch('/.netlify/functions/export-docx', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markdown: o, filename: `Arcspect-${n[currentMode]}-${Date.now()}.docx` })
+      });
+      const data = await res.json();
+      if (data.error) { toast('⚠ Export failed'); return; }
+      const blob = new Blob([Uint8Array.from(atob(data.data), c => c.charCodeAt(0))], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = data.filename; a.click();
+      URL.revokeObjectURL(url); toast('✓ Word doc downloaded');
+    } catch(err) { toast('⚠ Export failed'); }
+    finally { btn.disabled = false; btn.textContent = '↓ .docx'; }
+  }
+
+  async function exportPdf() {
+    const o = latest(); if (!o) return;
+    const btn = document.getElementById('dlPdfBtn');
+    const n = { prd:'PRD', stories:'User-Stories', criteria:'Acceptance-Criteria', metrics:'Success-Metrics', risks:'Risks-Assumptions' };
+    btn.disabled = true; btn.textContent = 'Exporting...';
+    try {
+      const res = await fetch('/.netlify/functions/export-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markdown: o, filename: `Arcspect-${n[currentMode]}-${Date.now()}.pdf` })
+      });
+      const data = await res.json();
+      if (data.error) { toast('⚠ Export failed'); return; }
+      const blob = new Blob([Uint8Array.from(atob(data.data), c => c.charCodeAt(0))], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = data.filename; a.click();
+      URL.revokeObjectURL(url); toast('✓ PDF downloaded');
+    } catch(err) { toast('⚠ Export failed'); }
+    finally { btn.disabled = false; btn.textContent = '↓ .pdf'; }
   }
 
   function clearOutput() {
