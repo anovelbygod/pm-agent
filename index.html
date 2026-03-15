@@ -673,6 +673,86 @@
   .modal-download:hover { background: var(--aventurine-light); }
   .modal-download:disabled { opacity: 0.35; cursor: not-allowed; }
 
+  /* ── Wireframes & Screenshots ── */
+  .visuals-section { border-top: 1px solid var(--border); }
+
+  .visuals-label {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--muted); padding: 12px 20px 6px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+
+  .upload-zone {
+    margin: 0 20px 14px;
+    border: 1.5px dashed var(--border2);
+    border-radius: 12px; padding: 18px;
+    text-align: center; cursor: pointer;
+    transition: all 0.25s;
+  }
+  .upload-zone:hover { border-color: var(--aventurine); background: rgba(74,124,89,0.03); }
+  .upload-zone.drag-over { border-color: var(--aventurine-light); background: rgba(74,124,89,0.06); }
+
+  .upload-zone-empty { display: block; }
+  .upload-zone-filled { display: none; }
+  .upload-zone.has-files .upload-zone-empty { display: none; }
+  .upload-zone.has-files .upload-zone-filled { display: block; }
+  .upload-zone.has-files { border-style: solid; border-color: var(--aventurine); background: rgba(74,124,89,0.03); padding: 14px; }
+
+  .uz-icon {
+    width: 32px; height: 32px; margin: 0 auto 10px;
+    border: 1px solid var(--border2); border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface2);
+  }
+
+  .uz-text { font-size: 12px; color: var(--text2); margin-bottom: 3px; font-weight: 500; }
+  .uz-sub { font-size: 11px; color: var(--muted); }
+  .uz-browse {
+    display: inline-block; margin-top: 8px;
+    font-family: var(--mono); font-size: 10px;
+    color: var(--aventurine-light); letter-spacing: 0.5px;
+    cursor: pointer;
+  }
+
+  .img-count {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--aventurine-light); margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .thumb-grid { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+
+  .thumb {
+    position: relative; width: 64px; height: 64px;
+    border-radius: 8px; flex-shrink: 0;
+  }
+
+  .thumb-img {
+    width: 64px; height: 64px; border-radius: 8px;
+    object-fit: cover; display: block;
+    border: 1px solid var(--border2);
+  }
+
+  .thumb-remove {
+    position: absolute; top: -6px; right: -6px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--danger); color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 11px; font-weight: 700;
+    border: 2px solid var(--bg); z-index: 2;
+    line-height: 1;
+  }
+
+  .thumb-add {
+    width: 64px; height: 64px; border-radius: 8px;
+    border: 1.5px dashed var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 20px; color: var(--muted);
+    flex-shrink: 0; transition: all 0.2s;
+    background: transparent;
+  }
+  .thumb-add:hover { border-color: var(--aventurine); color: var(--aventurine-light); }
+
   /* ── Go Deeper CTA ── */
   .go-deeper-section {
     display: none;
@@ -1004,6 +1084,33 @@
           </div>
         </div>
 
+        <div class="visuals-section">
+          <div class="visuals-label">Wireframes & screenshots</div>
+          <div class="upload-zone" id="uploadZone"
+               ondragover="handleDragOver(event)"
+               ondragleave="handleDragLeave(event)"
+               ondrop="handleDrop(event)"
+               onclick="triggerFileInput()">
+            <div class="upload-zone-empty">
+              <div class="uz-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <div class="uz-text">Drop wireframes or screenshots here</div>
+              <div class="uz-sub">PNG, JPG, WebP · up to 5 images · 10MB each</div>
+              <span class="uz-browse">Browse files</span>
+            </div>
+            <div class="upload-zone-filled">
+              <div class="img-count" id="imgCount">0 images attached</div>
+              <div class="thumb-grid" id="thumbGrid"></div>
+            </div>
+          </div>
+          <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" multiple style="display:none" onchange="handleFileSelect(event)"/>
+        </div>
+
         <div class="api-section">
           <div class="api-header">
             <span class="api-label">Anthropic API Key</span>
@@ -1142,6 +1249,7 @@
   // ── State ────────────────────────────────────────────────────────
   let ctxOpen = false, rememberKey = false, currentView = 'rendered';
   let currentMode = 'prd', currentIntel = '';
+  let attachedImages = []; // [{ dataUrl, base64, mediaType, name }]
 
   // Per-mode output cache: { prd: {text, words}, stories: {text, words}, ... }
   const modeCache = { prd: null, stories: null, criteria: null, metrics: null, risks: null };
@@ -1158,6 +1266,83 @@
     ctxOpen = !ctxOpen;
     document.getElementById('ctxInner').classList.toggle('open', ctxOpen);
     document.getElementById('ctxArrow').classList.toggle('open', ctxOpen);
+  }
+
+  // ── Image upload ──────────────────────────────────────────────────
+  function triggerFileInput() {
+    document.getElementById('fileInput').click();
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.add('drag-over');
+  }
+
+  function handleDragLeave(e) {
+    document.getElementById('uploadZone').classList.remove('drag-over');
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.remove('drag-over');
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    processImageFiles(files);
+  }
+
+  function handleFileSelect(e) {
+    const files = Array.from(e.target.files);
+    processImageFiles(files);
+    e.target.value = '';
+  }
+
+  function processImageFiles(files) {
+    const remaining = 5 - attachedImages.length;
+    if (remaining <= 0) { toast('⚠ Maximum 5 images'); return; }
+    const toProcess = files.slice(0, remaining);
+    toProcess.forEach(file => {
+      if (file.size > 10 * 1024 * 1024) { toast(`⚠ ${file.name} exceeds 10MB`); return; }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        const base64 = dataUrl.split(',')[1];
+        const mediaType = file.type;
+        attachedImages.push({ dataUrl, base64, mediaType, name: file.name });
+        renderThumbs();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function removeImage(index) {
+    attachedImages.splice(index, 1);
+    renderThumbs();
+  }
+
+  function renderThumbs() {
+    const zone = document.getElementById('uploadZone');
+    const grid = document.getElementById('thumbGrid');
+    const count = document.getElementById('imgCount');
+    zone.classList.toggle('has-files', attachedImages.length > 0);
+    count.textContent = attachedImages.length + (attachedImages.length === 1 ? ' image attached' : ' images attached');
+    grid.innerHTML = '';
+    attachedImages.forEach((img, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb';
+      thumb.innerHTML = `<img class="thumb-img" src="${img.dataUrl}" alt="${img.name}"/><div class="thumb-remove" onclick="event.stopPropagation();removeImage(${idx})">×</div>`;
+      grid.appendChild(thumb);
+    });
+    if (attachedImages.length < 5) {
+      const addBtn = document.createElement('div');
+      addBtn.className = 'thumb-add';
+      addBtn.textContent = '+';
+      addBtn.onclick = (e) => { e.stopPropagation(); triggerFileInput(); };
+      grid.appendChild(addBtn);
+    }
+  }
+
+  function clearImages() {
+    attachedImages = [];
+    renderThumbs();
   }
 
   // ── Remember ─────────────────────────────────────────────────────
@@ -1328,7 +1513,7 @@
       const res = await fetch('/.netlify/functions/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': key },
-        body: JSON.stringify({ prompt: modes[mode].prompt(input, ctx), model: 'claude-haiku-4-5-20251001' })
+        body: JSON.stringify({ prompt: modes[mode].prompt(input, ctx), model: 'claude-haiku-4-5-20251001', images: attachedImages.map(i => ({ base64: i.base64, mediaType: i.mediaType })) })
       });
       const data = await res.json();
       if (data.error) {
@@ -1466,7 +1651,7 @@ Be precise. Only include real, named companies. Surface uncomfortable truths abo
       const res = await fetch('/.netlify/functions/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': key },
-        body: JSON.stringify({ prompt, model: 'claude-haiku-4-5-20251001' })
+        body: JSON.stringify({ prompt, model: 'claude-haiku-4-5-20251001', images: attachedImages.map(i => ({ base64: i.base64, mediaType: i.mediaType })) })
       });
       const data = await res.json();
       if (data.error) {
