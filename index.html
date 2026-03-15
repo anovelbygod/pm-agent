@@ -753,6 +753,145 @@
   }
   .thumb-add:hover { border-color: var(--aventurine); color: var(--aventurine-light); }
 
+  .history-btn {
+    background: transparent;
+    border: 1px solid var(--border2); border-radius: 10px;
+    padding: 7px 14px; color: var(--muted);
+    font-family: var(--body); font-size: 12px;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .history-btn:hover { border-color: var(--aventurine); color: var(--text2); }
+
+  .history-count {
+    background: var(--aventurine); color: var(--bg);
+    border-radius: 10px; font-size: 9px;
+    padding: 1px 6px; font-weight: 600;
+    font-family: var(--mono);
+  }
+
+  /* History modal */
+  .history-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(4,8,5,0.85); z-index: 200;
+    align-items: flex-start; justify-content: center;
+    padding-top: 72px;
+  }
+  .history-overlay.open { display: flex; }
+
+  .history-modal {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 20px; width: 100%; max-width: 600px;
+    margin: 0 24px; overflow: hidden;
+    animation: fadeUp 0.25s ease both;
+    max-height: calc(100vh - 120px);
+    display: flex; flex-direction: column;
+  }
+
+  .hm-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .hm-title { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--text); }
+  .hm-meta { font-size: 11px; color: var(--muted); }
+  .hm-close {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1px solid var(--border2); background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; color: var(--muted);
+    transition: all 0.2s;
+  }
+  .hm-close:hover { border-color: var(--danger); color: var(--danger); }
+
+  .hm-search {
+    padding: 10px 22px; border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .hm-search-input {
+    width: 100%; background: var(--bg);
+    border: 1px solid var(--border2); border-radius: 10px;
+    padding: 9px 14px; color: var(--text);
+    font-family: var(--body); font-size: 12px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .hm-search-input:focus { border-color: var(--aventurine); }
+  .hm-search-input::placeholder { color: var(--muted); opacity: 0.5; }
+
+  .hm-list { overflow-y: auto; flex: 1; }
+  .hm-list::-webkit-scrollbar { width: 4px; }
+  .hm-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+  .hm-entry {
+    padding: 14px 22px; border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.15s;
+    position: relative;
+  }
+  .hm-entry:hover { background: var(--surface2); }
+  .hm-entry:last-child { border-bottom: none; }
+
+  .hm-entry-top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 12px; margin-bottom: 6px;
+  }
+  .hm-idea { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; flex: 1; }
+  .hm-time { font-size: 10px; color: var(--muted); white-space: nowrap; flex-shrink: 0; margin-top: 2px; font-family: var(--mono); }
+
+  .hm-preview {
+    font-size: 11px; color: var(--text2); line-height: 1.65;
+    margin-bottom: 9px;
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  .hm-footer { display: flex; align-items: center; justify-content: space-between; }
+
+  .hm-pills { display: flex; gap: 5px; flex-wrap: wrap; }
+  .hm-pill {
+    font-family: var(--mono); font-size: 9px;
+    padding: 2px 7px; border-radius: 10px;
+    border: 1px solid var(--border2); color: var(--muted);
+    background: transparent; letter-spacing: 0.3px;
+  }
+  .hm-pill.done { border-color: var(--aventurine); color: var(--aventurine-light); background: rgba(74,124,89,0.06); }
+
+  .hm-actions {
+    display: flex; gap: 6px;
+    opacity: 0; transition: opacity 0.15s;
+  }
+  .hm-entry:hover .hm-actions { opacity: 1; }
+
+  .hm-act {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--muted); cursor: pointer;
+    padding: 3px 8px; border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: transparent; transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .hm-act:hover { border-color: var(--aventurine); color: var(--aventurine-light); }
+  .hm-act-del:hover { border-color: var(--danger); color: var(--danger); }
+
+  .hm-empty {
+    padding: 48px 22px; text-align: center;
+    color: var(--muted); font-size: 13px; line-height: 1.6;
+  }
+
+  .hm-bottom {
+    padding: 11px 22px; border-top: 1px solid var(--border);
+    background: var(--surface2); display: flex;
+    align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .hm-bottom-note { font-size: 11px; color: var(--muted); }
+  .hm-clear-all {
+    font-size: 11px; color: var(--muted); cursor: pointer;
+    background: none; border: none; font-family: var(--body);
+    transition: color 0.2s;
+  }
+  .hm-clear-all:hover { color: var(--danger); }
+
   /* ── Go Deeper CTA ── */
   .go-deeper-section {
     display: none;
@@ -1020,6 +1159,10 @@
     <div class="logo-name">Arc<span>spect</span></div>
   </div>
   <div class="header-right">
+    <button class="history-btn" id="historyBtn" onclick="openHistory()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      History <span class="history-count" id="historyCount" style="display:none">0</span>
+    </button>
     <div class="badge badge-ai">Built with Claude</div>
   </div>
 </header>
@@ -1242,6 +1385,29 @@
   </div>
 
 </main>
+
+<!-- HISTORY MODAL -->
+<div class="history-overlay" id="historyOverlay" onclick="closeHistoryOutside(event)">
+  <div class="history-modal">
+    <div class="hm-header">
+      <div>
+        <div class="hm-title">Session history</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="hm-meta" id="hmMeta">0 sessions saved</span>
+        <div class="hm-close" onclick="closeHistory()">×</div>
+      </div>
+    </div>
+    <div class="hm-search">
+      <input class="hm-search-input" id="hmSearch" placeholder="Search by idea or content..." oninput="renderHistoryList()" />
+    </div>
+    <div class="hm-list" id="hmList"></div>
+    <div class="hm-bottom">
+      <span class="hm-bottom-note">Saved locally on this device</span>
+      <button class="hm-clear-all" onclick="clearAllHistory()">Clear all history</button>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1539,6 +1705,7 @@
       document.getElementById('goDeeperBtn').disabled = false;
       toast(`✓ ${modeNames[mode]} ready`);
       if (rememberKey) localStorage.setItem('arc_key', key);
+      saveCurrentSession();
 
     } catch(err) {
       scroll.innerHTML = `<div class="output-empty"><div class="empty-gem">!</div><div class="empty-text" style="color:var(--danger)">Something went wrong. Check your API key.</div></div>`;
@@ -1943,6 +2110,196 @@ Be precise. Only include real, named companies. Surface uncomfortable truths abo
     .finally(() => { btn.disabled = false; btn.textContent = `Download ${count} sections →`; updateModalBtn(); });
   }
 
+  // ── History ───────────────────────────────────────────────────────
+  const HISTORY_KEY = 'arc_history';
+  const HISTORY_MAX = 20;
+  const modeLabels = { prd: 'PRD', stories: 'User stories', criteria: 'Acceptance criteria', metrics: 'Metrics', risks: 'Risks' };
+  const modeOrder = ['prd', 'stories', 'criteria', 'metrics', 'risks'];
+
+  function loadHistory() {
+    try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
+    catch(e) { return []; }
+  }
+
+  function saveHistory(entries) {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(entries));
+  }
+
+  function saveCurrentSession() {
+    const input = document.getElementById('inputText').value.trim();
+    if (!input) return;
+    const generatedModes = Object.fromEntries(
+      Object.entries(modeCache).map(([k, v]) => [k, v ? { text: v.text, words: v.words } : null])
+    );
+    const hasAny = Object.values(generatedModes).some(Boolean);
+    if (!hasAny) return;
+
+    // Get preview from first generated mode
+    const firstMode = modeOrder.find(m => generatedModes[m]);
+    const preview = firstMode ? generatedModes[firstMode].text.slice(0, 300).replace(/^#+\s+/gm, '').replace(/\*\*/g, '').trim() : '';
+
+    const entry = {
+      id: Date.now(),
+      ts: Date.now(),
+      idea: input,
+      preview,
+      modes: generatedModes,
+      intel: currentIntel || null,
+      context: document.getElementById('contextText').value.trim()
+    };
+
+    const history = loadHistory();
+    // Remove duplicate idea if exists
+    const deduped = history.filter(e => e.idea !== input);
+    const updated = [entry, ...deduped].slice(0, HISTORY_MAX);
+    saveHistory(updated);
+    updateHistoryCount();
+  }
+
+  function updateHistoryCount() {
+    const history = loadHistory();
+    const count = history.length;
+    const el = document.getElementById('historyCount');
+    const btn = document.getElementById('historyBtn');
+    if (count > 0) {
+      el.textContent = count;
+      el.style.display = 'inline';
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
+  function openHistory() {
+    document.getElementById('historyOverlay').classList.add('open');
+    document.getElementById('hmSearch').value = '';
+    renderHistoryList();
+  }
+
+  function closeHistory() {
+    document.getElementById('historyOverlay').classList.remove('open');
+  }
+
+  function closeHistoryOutside(e) {
+    if (e.target === document.getElementById('historyOverlay')) closeHistory();
+  }
+
+  function formatTime(ts) {
+    const now = Date.now();
+    const d = new Date(ts);
+    const diffMs = now - ts;
+    const diffDays = Math.floor(diffMs / 86400000);
+    if (diffDays === 0) return 'Today, ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    if (diffDays === 1) return 'Yesterday, ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleDateString([], { month: 'short', day: 'numeric' }) + ', ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function renderHistoryList() {
+    const history = loadHistory();
+    const query = (document.getElementById('hmSearch').value || '').toLowerCase();
+    const filtered = query
+      ? history.filter(e => e.idea.toLowerCase().includes(query) || e.preview.toLowerCase().includes(query))
+      : history;
+
+    const meta = document.getElementById('hmMeta');
+    meta.textContent = history.length + (history.length === 1 ? ' session saved' : ' sessions saved');
+
+    const list = document.getElementById('hmList');
+    if (!filtered.length) {
+      list.innerHTML = `<div class="hm-empty">${query ? 'No sessions match your search.' : 'No sessions saved yet. Generate a PRD to start building your history.'}</div>`;
+      return;
+    }
+
+    list.innerHTML = filtered.map(entry => {
+      const pills = modeOrder.map(m => {
+        const done = entry.modes && entry.modes[m];
+        return `<span class="hm-pill${done ? ' done' : ''}">${modeLabels[m]}</span>`;
+      }).join('');
+
+      return `<div class="hm-entry" data-id="${entry.id}">
+        <div class="hm-entry-top">
+          <div class="hm-idea">${entry.idea}</div>
+          <div class="hm-time">${formatTime(entry.ts)}</div>
+        </div>
+        <div class="hm-preview">${entry.preview}</div>
+        <div class="hm-footer">
+          <div class="hm-pills">${pills}</div>
+          <div class="hm-actions">
+            <button class="hm-act" onclick="event.stopPropagation();restoreSession(${entry.id})">Restore</button>
+            <button class="hm-act hm-act-del" onclick="event.stopPropagation();deleteSession(${entry.id})">Delete</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function restoreSession(id) {
+    const history = loadHistory();
+    const entry = history.find(e => e.id === id);
+    if (!entry) return;
+
+    // Restore idea and context
+    document.getElementById('inputText').value = entry.idea;
+    document.getElementById('contextText').value = entry.context || '';
+
+    // Restore mode caches
+    Object.keys(modeCache).forEach(k => {
+      modeCache[k] = entry.modes && entry.modes[k] ? entry.modes[k] : null;
+    });
+
+    // Restore intel
+    currentIntel = entry.intel || '';
+
+    // Switch to PRD mode and render first available output
+    const firstMode = modeOrder.find(m => modeCache[m]);
+    if (firstMode) {
+      currentMode = firstMode;
+      // Update mode hint and input placeholder
+      document.getElementById('modeHint').textContent = modes[firstMode].hint;
+      document.getElementById('inputText').placeholder = modes[firstMode].placeholder;
+      document.getElementById('modeTag').textContent = { prd:'PRD', stories:'Stories', criteria:'Criteria', metrics:'Metrics', risks:'Risks' }[firstMode];
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === firstMode));
+      renderOutput(modeCache[firstMode].text, modeCache[firstMode].words);
+    }
+
+    // Update status tabs and go deeper
+    updateStatusTabs(null);
+    updateBriefCount();
+    if (Object.values(modeCache).some(Boolean)) {
+      document.getElementById('goDeeperSection').classList.add('visible');
+      document.getElementById('goDeeperBtn').disabled = false;
+    }
+
+    // Restore intel panel if present
+    if (currentIntel) {
+      const intelPanel = document.getElementById('intelPanel');
+      const intelBody = document.getElementById('intelBody');
+      intelPanel.classList.add('visible');
+      intelBody.innerHTML = mdIntel(currentIntel);
+      document.getElementById('intelStatus').textContent = 'Ready';
+      document.getElementById('intelDot').className = 'status-dot gold';
+      ['intelCopyBtn','intelDlBtn'].forEach(id => document.getElementById(id).disabled = false);
+    }
+
+    closeHistory();
+    toast('✓ Session restored');
+  }
+
+  function deleteSession(id) {
+    const history = loadHistory().filter(e => e.id !== id);
+    saveHistory(history);
+    updateHistoryCount();
+    renderHistoryList();
+    toast('Session deleted');
+  }
+
+  function clearAllHistory() {
+    if (!loadHistory().length) return;
+    saveHistory([]);
+    updateHistoryCount();
+    renderHistoryList();
+    toast('History cleared');
+  }
+
   // ── Toast ──────────────────────────────────────────────────────────
   function toast(msg) {
     const t = document.getElementById('toast');
@@ -1954,13 +2311,14 @@ Be precise. Only include real, named companies. Surface uncomfortable truths abo
   window.addEventListener('DOMContentLoaded', () => {
     initRemember();
     updateStatusTabs(null);
+    updateHistoryCount();
     document.getElementById('apiKey').addEventListener('input', () => {
       if (rememberKey) localStorage.setItem('arc_key', document.getElementById('apiKey').value);
     });
   });
   document.addEventListener('keydown', e => {
     if ((e.metaKey||e.ctrlKey) && e.key==='Enter') generate();
-    if (e.key === 'Escape') closeBriefModal();
+    if (e.key === 'Escape') { closeBriefModal(); closeHistory(); }
   });
 </script>
 </body>
