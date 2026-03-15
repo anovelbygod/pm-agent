@@ -37,7 +37,6 @@
     overflow-x: hidden;
   }
 
-  /* Subtle organic background */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -48,7 +47,6 @@
     pointer-events: none; z-index: 0;
   }
 
-  /* Grain texture overlay */
   body::after {
     content: '';
     position: fixed; inset: 0;
@@ -95,9 +93,7 @@
     color: var(--text);
   }
 
-  .logo-name span {
-    color: var(--aventurine-light);
-  }
+  .logo-name span { color: var(--aventurine-light); }
 
   .header-right { display: flex; align-items: center; gap: 12px; }
 
@@ -259,6 +255,10 @@
   .status-dot.live {
     background: var(--aventurine-light);
     box-shadow: 0 0 6px rgba(107,175,128,0.6);
+  }
+  .status-dot.gold {
+    background: var(--gold);
+    box-shadow: 0 0 6px rgba(201,168,76,0.6);
   }
 
   /* Input body */
@@ -435,7 +435,6 @@
     min-height: 360px; max-height: 560px;
   }
 
-  /* Scrollbar */
   .output-scroll::-webkit-scrollbar { width: 4px; }
   .output-scroll::-webkit-scrollbar-track { background: transparent; }
   .output-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
@@ -536,6 +535,201 @@
   }
   .act-btn-clear:hover { border-color: var(--danger); color: var(--danger); }
 
+  /* ── Go Deeper CTA ── */
+  .go-deeper-section {
+    display: none;
+    margin-top: 20px;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--surface);
+    animation: fadeUp 0.5s ease both;
+  }
+  .go-deeper-section.visible { display: block; }
+
+  .go-deeper-inner {
+    padding: 24px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  .go-deeper-left { flex: 1; }
+
+  .go-deeper-eyebrow {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .go-deeper-eyebrow::before {
+    content: '';
+    width: 16px; height: 1px;
+    background: rgba(201,168,76,0.3);
+  }
+
+  .go-deeper-title {
+    font-family: var(--display);
+    font-size: 18px; font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .go-deeper-desc {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.6; max-width: 480px;
+  }
+
+  .go-deeper-btn {
+    background: rgba(201,168,76,0.1);
+    color: var(--gold-soft);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-family: var(--body); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s ease;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 10px;
+    letter-spacing: 0.2px;
+    flex-shrink: 0;
+  }
+  .go-deeper-btn:hover {
+    background: rgba(201,168,76,0.18);
+    border-color: var(--gold);
+    color: var(--text);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(201,168,76,0.15);
+  }
+  .go-deeper-btn:active { transform: translateY(0); }
+  .go-deeper-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .go-deeper-gem {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--gold);
+    border-radius: 5px;
+    transform: rotate(15deg);
+    flex-shrink: 0;
+    background: rgba(201,168,76,0.1);
+  }
+
+  /* ── Competitive Intelligence Panel ── */
+  .intel-panel {
+    display: none;
+    margin-top: 20px;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--surface);
+    animation: fadeUp 0.5s ease both;
+  }
+  .intel-panel.visible { display: block; }
+
+  .intel-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(201,168,76,0.04);
+  }
+
+  .intel-header-left { display: flex; align-items: center; gap: 10px; }
+
+  .intel-gem {
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--gold);
+    border-radius: 5px;
+    transform: rotate(15deg);
+    background: rgba(201,168,76,0.1);
+    flex-shrink: 0;
+  }
+
+  .intel-label {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+
+  .intel-status {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 10px; color: var(--muted);
+  }
+
+  .intel-body {
+    padding: 24px;
+    overflow-y: auto;
+    max-height: 600px;
+  }
+  .intel-body::-webkit-scrollbar { width: 4px; }
+  .intel-body::-webkit-scrollbar-track { background: transparent; }
+  .intel-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+  /* Competitor cards rendered inside intel-body via markdown */
+  .intel-body h1 {
+    font-family: var(--display); font-weight: 700; font-size: 18px;
+    letter-spacing: -0.5px; margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    color: var(--text);
+  }
+  .intel-body h2 {
+    font-family: var(--body); font-weight: 600; font-size: 10px;
+    color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+    margin: 22px 0 10px;
+  }
+  .intel-body h3 {
+    font-family: var(--body); font-weight: 600; font-size: 14px;
+    color: var(--text);
+    margin: 20px 0 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .intel-body h3::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .intel-body p { margin-bottom: 10px; color: var(--text2); font-size: 13px; line-height: 1.75; }
+  .intel-body ul { padding-left: 18px; margin-bottom: 10px; }
+  .intel-body li { margin-bottom: 6px; color: var(--text2); font-size: 13px; }
+  .intel-body strong { color: var(--text); font-weight: 600; }
+  .intel-body em { color: var(--gold-soft); font-style: italic; }
+  .intel-body a { color: var(--gold-soft); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3); transition: border-color 0.2s; }
+  .intel-body a:hover { border-color: var(--gold); }
+  .intel-body hr { border: none; border-top: 1px solid rgba(201,168,76,0.15); margin: 20px 0; }
+  .intel-body code {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--surface3); padding: 2px 6px;
+    border-radius: 4px; color: var(--gold-soft);
+    border: 1px solid var(--border);
+  }
+  .intel-body table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12px; }
+  .intel-body th {
+    background: rgba(201,168,76,0.06); padding: 9px 12px;
+    text-align: left; font-family: var(--mono); font-size: 9px;
+    color: var(--gold); letter-spacing: 1px; text-transform: uppercase;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .intel-body td { padding: 8px 12px; border: 1px solid var(--border); vertical-align: top; color: var(--text2); }
+  .intel-body .cb { color: var(--gold); margin-right: 7px; }
+
+  /* Intel actions */
+  .intel-actions {
+    padding: 14px 20px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    display: flex; gap: 8px; align-items: center;
+    background: rgba(201,168,76,0.03);
+  }
+
+  .intel-act-btn {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.2); border-radius: 8px;
+    padding: 8px 16px; color: var(--muted);
+    font-family: var(--mono); font-size: 10px;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .intel-act-btn:hover { border-color: var(--gold); color: var(--gold-soft); }
+  .intel-act-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
   /* Loading */
   .loading {
     display: flex; flex-direction: column;
@@ -549,6 +743,14 @@
     border-radius: 10px; transform: rotate(15deg);
     animation: gemPulse 1.5s ease-in-out infinite;
     background: rgba(74,124,89,0.08);
+  }
+
+  .loading-gem-gold {
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--gold);
+    border-radius: 10px; transform: rotate(15deg);
+    animation: gemPulseGold 1.5s ease-in-out infinite;
+    background: rgba(201,168,76,0.06);
   }
 
   .loading-text {
@@ -579,11 +781,16 @@
     0%, 100% { box-shadow: 0 0 0 0 rgba(107,175,128,0.3); transform: rotate(15deg) scale(1); }
     50% { box-shadow: 0 0 0 8px rgba(107,175,128,0); transform: rotate(15deg) scale(1.05); }
   }
+  @keyframes gemPulseGold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.3); transform: rotate(15deg) scale(1); }
+    50% { box-shadow: 0 0 0 8px rgba(201,168,76,0); transform: rotate(15deg) scale(1.05); }
+  }
 
   @media (max-width: 900px) {
     header, main { padding-left: 24px; padding-right: 24px; }
     .mode-grid { grid-template-columns: repeat(3, 1fr); }
     .workspace { grid-template-columns: 1fr; }
+    .go-deeper-inner { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -644,8 +851,7 @@
         <div class="mode-hint" id="modeHint">Describe your product idea or feature. One sentence is enough to generate a full PRD.</div>
         <div class="field-label">Your idea</div>
         <textarea id="inputText" rows="6" placeholder="e.g. A feature that lets merchants set up automatic settlement schedules to their bank accounts..."></textarea>
-        <div id="charCount" style="font-family: var(--mono); font-size: 10px; color: var(--muted); padding: 0 20px 12px; letter-spacing: 1px; text-align: right;"></div>
-        
+
         <div class="context-section">
           <div class="context-trigger" onclick="toggleContext()">
             <div class="context-trigger-left">
@@ -656,7 +862,6 @@
           </div>
           <div class="context-inner" id="ctxInner">
             <textarea class="context-field" id="contextText" rows="4" placeholder="Paste user research, business goals, technical constraints, competitive context, or any background that will make the output more accurate..."></textarea>
-            <div id="ctxCount" style="font-family: var(--mono); font-size: 10px; color: var(--muted); padding: 0 0 6px; letter-spacing: 1px; text-align: right;"></div>
             <div class="context-tip">Tip: the more context you add, the more precise and tailored your documentation will be.</div>
           </div>
         </div>
@@ -709,6 +914,46 @@
     </div>
 
   </div>
+
+  <!-- GO DEEPER CTA — appears after PRD is ready -->
+  <div class="go-deeper-section" id="goDeeperSection">
+    <div class="go-deeper-inner">
+      <div class="go-deeper-left">
+        <div class="go-deeper-eyebrow">Intelligence layer</div>
+        <div class="go-deeper-title">Go Deeper — Research Competitors</div>
+        <div class="go-deeper-desc">Arcspect will analyse your idea and surface the competitive landscape — named competitors, positioning gaps, and a comparison table. Exported separately from your PRD.</div>
+      </div>
+      <button class="go-deeper-btn" id="goDeeperBtn" onclick="goDeeper()">
+        <div class="go-deeper-gem"></div>
+        Research Competitors →
+      </button>
+    </div>
+  </div>
+
+  <!-- COMPETITIVE INTELLIGENCE PANEL — appears after goDeeper runs -->
+  <div class="intel-panel" id="intelPanel">
+    <div class="intel-header">
+      <div class="intel-header-left">
+        <div class="intel-gem"></div>
+        <span class="intel-label">Competitive Intelligence</span>
+      </div>
+      <div class="intel-status">
+        <div class="status-dot gold" id="intelDot"></div>
+        <span id="intelStatus">Researching</span>
+      </div>
+    </div>
+    <div class="intel-body" id="intelBody">
+      <div class="loading">
+        <div class="loading-gem-gold"></div>
+        <div class="loading-text">mapping the landscape</div>
+      </div>
+    </div>
+    <div class="intel-actions">
+      <button class="intel-act-btn" id="intelCopyBtn" onclick="copyIntel()" disabled>Copy brief</button>
+      <button class="intel-act-btn" id="intelDlBtn" onclick="downloadIntel()" disabled>Download .md</button>
+    </div>
+  </div>
+
 </main>
 
 <div class="toast" id="toast"></div>
@@ -716,7 +961,7 @@
 <script>
   // ── State ────────────────────────────────────────────────────────
   let ctxOpen = false, rememberKey = false, currentView = 'rendered';
-  let currentMode = 'prd', currentOutput = '';
+  let currentMode = 'prd', currentOutput = '', currentIntel = '';
 
   // ── Context ──────────────────────────────────────────────────────
   function toggleContext() {
@@ -820,14 +1065,19 @@
     const btn = document.getElementById('generateBtn');
     btn.disabled = true; btn.textContent = 'Generating...';
 
+    // Hide go deeper and intel panel on new generation
+    document.getElementById('goDeeperSection').classList.remove('visible');
+    document.getElementById('intelPanel').classList.remove('visible');
+    currentIntel = '';
+
     const scroll = document.getElementById('outputScroll');
     const editable = document.getElementById('outputEditable');
     scroll.style.display = 'block'; editable.style.display = 'none';
     document.getElementById('outputDot').classList.add('live');
     document.getElementById('outputStatus').textContent = 'Generating';
 
-    scroll.innerHTML = `<div class="loading"><div class="loading-gem"></div><div class="loading-text">crafting ${modeTags[currentMode]}</div></div>`;
-    outputBtns.forEach(id => document.getElementById(id).disabled = true);
+    scroll.innerHTML = `<div class="loading"><div class="loading-gem"></div><div class="loading-text">crafting documentation</div></div>`;
+    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = true);
 
     try {
       const res = await fetch('/.netlify/functions/generate', {
@@ -850,10 +1100,14 @@
       document.getElementById('wordCount').textContent = words + ' words';
       document.getElementById('outputStatus').textContent = 'Ready';
 
-      outputBtns.forEach(id => document.getElementById(id).disabled = false);
+      ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = false);
       currentView = 'rendered';
       document.getElementById('viewBtn').classList.add('active');
       document.getElementById('editBtn').classList.remove('active');
+
+      // Show Go Deeper CTA
+      document.getElementById('goDeeperSection').classList.add('visible');
+      document.getElementById('goDeeperBtn').disabled = false;
 
       toast('✓ Documentation ready');
       if (rememberKey) localStorage.setItem('arc_key', key);
@@ -866,7 +1120,94 @@
     }
   }
 
-  // ── Markdown ──────────────────────────────────────────────────────
+  // ── Go Deeper ─────────────────────────────────────────────────────
+  async function goDeeper() {
+    const key = document.getElementById('apiKey').value.trim();
+    if (!key) { toast('⚠ Add your API key first'); return; }
+    if (!currentOutput) { toast('⚠ Generate a PRD first'); return; }
+
+    const btn = document.getElementById('goDeeperBtn');
+    btn.disabled = true; btn.textContent = 'Researching...';
+
+    // Show intel panel in loading state
+    const intelPanel = document.getElementById('intelPanel');
+    const intelBody = document.getElementById('intelBody');
+    intelPanel.classList.add('visible');
+    intelBody.innerHTML = `<div class="loading"><div class="loading-gem-gold"></div><div class="loading-text">mapping the landscape</div></div>`;
+    document.getElementById('intelStatus').textContent = 'Researching';
+    document.getElementById('intelDot').className = 'status-dot gold';
+    ['intelCopyBtn','intelDlBtn'].forEach(id => document.getElementById(id).disabled = true);
+
+    // Scroll to panel
+    intelPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Build the competitive intelligence prompt using the PRD as context
+    const prompt = `You are a senior product strategist and competitive intelligence expert. Based on the following PRD, identify and analyse the competitive landscape.
+
+PRD:
+${currentOutput}
+
+Generate a competitive intelligence brief in markdown with the following structure:
+
+# Competitive Intelligence Brief
+
+## Overview
+A 2-3 sentence summary of the competitive landscape for this idea.
+
+## Named Competitors
+
+For each competitor (aim for 4-6), use this format:
+
+### [Competitor Name]
+**What they do:** One clear sentence on their core product.
+**Target market:** Who they serve.
+**How they position:** Their key differentiator or angle.
+**Perceived gap:** What they don't do well or who they underserve — this is the opening.
+**Website:** [company.com](https://company.com)
+
+---
+
+## Comparison Table
+
+| Company | Target Market | Key Strength | Notable Gap | Pricing Model |
+|---------|---------------|--------------|-------------|---------------|
+[Fill in rows for each competitor]
+
+## Where the Opportunity Lives
+2-3 sentences on the differentiator angle based on the gaps identified. Be specific and actionable — tell the PM where to position.
+
+Be precise. Only include real, named companies. Surface uncomfortable truths about the competitive landscape.`;
+
+    try {
+      const res = await fetch('/.netlify/functions/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': key },
+        body: JSON.stringify({ prompt, model: 'claude-haiku-4-5-20251001' })
+      });
+      const data = await res.json();
+      if (data.error) {
+        intelBody.innerHTML = `<div class="output-empty"><div class="empty-gem">!</div><div class="empty-text" style="color:var(--danger)">${data.error.message||'API error'}</div></div>`;
+        document.getElementById('intelStatus').textContent = 'Error';
+        return;
+      }
+
+      currentIntel = data.content[0].text;
+      intelBody.innerHTML = mdIntel(currentIntel);
+      document.getElementById('intelStatus').textContent = 'Ready';
+      ['intelCopyBtn','intelDlBtn'].forEach(id => document.getElementById(id).disabled = false);
+
+      toast('✓ Competitive brief ready');
+      if (rememberKey) localStorage.setItem('arc_key', key);
+
+    } catch(err) {
+      intelBody.innerHTML = `<div class="output-empty"><div class="empty-gem">!</div><div class="empty-text" style="color:var(--danger)">Something went wrong. Check your API key.</div></div>`;
+      document.getElementById('intelStatus').textContent = 'Error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Research Competitors →';
+    }
+  }
+
+  // ── Markdown (PRD output) ─────────────────────────────────────────
   function md(text) {
     const lines = text.split('\n');
     let html = '', list = false, table = false, thead = false;
@@ -895,11 +1236,49 @@
     return html;
   }
 
+  // ── Markdown (Intel output — same parser, links enabled) ──────────
+  function mdIntel(text) {
+    const lines = text.split('\n');
+    let html = '', list = false, table = false, thead = false;
+    for (let line of lines) {
+      if (line.startsWith('|')) {
+        if (!table) { html += '<table>'; table = true; thead = true; }
+        if (/^[\|\s\-:]+$/.test(line)) { thead = false; continue; }
+        const cells = line.split('|').filter(c => c.trim());
+        const tag = thead ? 'th' : 'td';
+        html += '<tr>' + cells.map(c => `<${tag}>${inlLink(c.trim())}</${tag}>`).join('') + '</tr>';
+        continue;
+      } else if (table) { html += '</table>'; table = false; }
+      if (line.startsWith('### ')) { if (list) { html += '</ul>'; list = false; } html += `<h3>${inlLink(line.slice(4))}</h3>`; continue; }
+      if (line.startsWith('## ')) { if (list) { html += '</ul>'; list = false; } html += `<h2>${inlLink(line.slice(3))}</h2>`; continue; }
+      if (line.startsWith('# ')) { if (list) { html += '</ul>'; list = false; } html += `<h1>${inlLink(line.slice(2))}</h1>`; continue; }
+      if (/^---+$/.test(line)) { if (list) { html += '</ul>'; list = false; } html += '<hr/>'; continue; }
+      if (/^- \[ \] /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li><span class="cb">☐</span>${inlLink(line.slice(6))}</li>`; continue; }
+      if (/^- /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inlLink(line.slice(2))}</li>`; continue; }
+      if (/^\d+\. /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inlLink(line.replace(/^\d+\. /,''))}</li>`; continue; }
+      if (list) { html += '</ul>'; list = false; }
+      if (!line.trim()) continue;
+      html += `<p>${inlLink(line)}</p>`;
+    }
+    if (list) html += '</ul>';
+    if (table) html += '</table>';
+    return html;
+  }
+
   function inl(t) {
     return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`([^`]+)`/g,'<code>$1</code>');
   }
 
-  // ── Actions ───────────────────────────────────────────────────────
+  // inlLink — same as inl but also converts [text](url) markdown links
+  function inlLink(t) {
+    return t
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/`([^`]+)`/g,'<code>$1</code>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1 ↗</a>');
+  }
+
+  // ── Actions (PRD) ─────────────────────────────────────────────────
   function latest() { if (currentView==='edit') currentOutput = document.getElementById('outputEditable').value; return currentOutput; }
 
   function copyOutput() { const o = latest(); if (!o) return; navigator.clipboard.writeText(o); toast('✓ Copied'); }
@@ -915,7 +1294,7 @@
   }
 
   function clearOutput() {
-    currentOutput = '';
+    currentOutput = ''; currentIntel = '';
     const scroll = document.getElementById('outputScroll');
     scroll.innerHTML = `<div class="output-empty"><div class="empty-gem">◈</div><div class="empty-text">Your documentation will appear here after generation.</div></div>`;
     scroll.style.display = 'block';
@@ -924,71 +1303,47 @@
     document.getElementById('outputDot').classList.remove('live');
     document.getElementById('outputStatus').textContent = 'Waiting';
     document.getElementById('wordCount').textContent = '';
-    outputBtns.forEach(id => document.getElementById(id).disabled = true);
+    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = true);
     document.getElementById('viewBtn').classList.add('active');
     document.getElementById('editBtn').classList.remove('active');
     currentView = 'rendered';
+    // Hide go deeper and intel
+    document.getElementById('goDeeperSection').classList.remove('visible');
+    document.getElementById('intelPanel').classList.remove('visible');
   }
 
+  // ── Actions (Intel) ───────────────────────────────────────────────
+  function copyIntel() {
+    if (!currentIntel) return;
+    navigator.clipboard.writeText(currentIntel);
+    toast('✓ Brief copied');
+  }
+
+  function downloadIntel() {
+    if (!currentIntel) return;
+    const blob = new Blob([currentIntel], { type:'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `Arcspect-Competitive-Intelligence-${Date.now()}.md`; a.click();
+    URL.revokeObjectURL(url);
+    toast('✓ Brief downloaded');
+  }
+
+  // ── Toast ──────────────────────────────────────────────────────────
   function toast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
-  // ── Output button IDs ─────────────────────────────────────────────
-const outputBtns = ['copyBtn', 'dlBtn', 'clearBtn', 'viewBtn', 'editBtn'];
 
-// ── Button state ──────────────────────────────────────────────────
-function updateButtonState() {
-  const value = document.getElementById('inputText').value.trim();
-  const apiKey = document.getElementById('apiKey').value.trim();
-  const btn = document.getElementById('generateBtn');
-
-  if (value.length === 0) {
-    btn.textContent = 'Write something first';
-    btn.style.opacity = '0.4';
-  } else if (value.length > 0 && apiKey.length === 0) {
-    btn.textContent = 'Add API key →';
-    btn.style.opacity = '0.6';
-  } else {
-    btn.textContent = 'Generate →';
-    btn.style.opacity = '1';
-  }
-}
   // ── Init ──────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  initRemember();
-
-  document.getElementById('inputText').addEventListener('input', () => {
-    const value = document.getElementById('inputText').value.trim();
-    const apiKey = document.getElementById('apiKey').value.trim();
-    const btn = document.getElementById('generateBtn');
-
-    // Character counter
-    const count = document.getElementById('inputText').value.length;
-    const counter = document.getElementById('charCount');
-    counter.textContent = count > 0 ? count + ' / 500' : '';
-    counter.style.color = count > 400 ? 'var(--danger)' : 'var(--muted)';
-
-    // Button state
-    updateButtonState();
+  window.addEventListener('DOMContentLoaded', () => {
+    initRemember();
+    document.getElementById('apiKey').addEventListener('input', () => {
+      if (rememberKey) localStorage.setItem('arc_key', document.getElementById('apiKey').value);
+    });
   });
-
-  document.getElementById('contextText').addEventListener('input', () => {
-    const count = document.getElementById('contextText').value.length;
-    const counter = document.getElementById('ctxCount');
-    counter.textContent = count > 0 ? count + ' / 1000' : '';
-    counter.style.color = count > 800 ? 'var(--danger)' : 'var(--muted)';
-  });
-
-  document.getElementById('apiKey').addEventListener('input', () => {
-    if (rememberKey) localStorage.setItem('arc_key', document.getElementById('apiKey').value);
-
-    updateButtonState();
-});
-});
-
-document.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey) && e.key==='Enter') generate(); });
+  document.addEventListener('keydown', e => { if ((e.metaKey||e.ctrlKey) && e.key==='Enter') generate(); });
 </script>
 </body>
 </html>

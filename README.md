@@ -62,14 +62,11 @@ You'll need an [Anthropic API key](https://console.anthropic.com) to generate do
 ---
 
 ## Roadmap
-
-- [x] Full PRD generator
-- [x] User stories, acceptance criteria, metrics, risks
-- [x] Context input for richer output
-- [x] Editable output with preview/edit toggle
-- [ ] Screenshot / wireframe input
-- [ ] Export to Notion
-- [ ] Saved history
+- [x] PRD, user stories, acceptance criteria, metrics, risks
+- [x] Context input, editable output, preview/edit toggle
+- [ ] Competitive intelligence layer
+- [ ] Deeper research modes
+- [ ] Export integrations
 
 ---
 
