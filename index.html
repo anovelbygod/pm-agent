@@ -121,12 +121,12 @@
   main {
     position: relative; z-index: 1;
     max-width: 1320px; margin: 0 auto;
-    padding: 56px 48px 80px;
+    padding: 32px 48px 80px;
   }
 
   /* Hero */
   .hero {
-    text-align: center; margin-bottom: 56px;
+    text-align: center; margin-bottom: 36px;
     animation: fadeUp 0.7s ease both;
   }
 
@@ -145,11 +145,11 @@
 
   .hero h1 {
     font-family: var(--display);
-    font-size: clamp(40px, 5.5vw, 72px);
+    font-size: clamp(32px, 4.5vw, 56px);
     font-weight: 800;
     line-height: 1.05;
-    letter-spacing: -2.5px;
-    margin-bottom: 20px;
+    letter-spacing: -2px;
+    margin-bottom: 14px;
     color: var(--text);
   }
 
@@ -204,7 +204,29 @@
   }
   .mode-btn.active::before { opacity: 1; }
 
-  .mode-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .mode-icon {
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px; height: 22px;
+    color: currentColor;
+  }
+  .mode-icon svg { stroke: currentColor; }
+
+  .shortcut-hint {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--muted); text-align: right;
+    padding: 5px 20px 10px; letter-spacing: 0.5px;
+    opacity: 0.6;
+  }
+
+  .mode-hint {
+    font-size: 12px; color: var(--muted);
+    padding: 12px 20px; line-height: 1.6;
+    border-bottom: 1px solid var(--border);
+    background: rgba(74,124,89,0.03);
+    min-height: 52px;
+    transition: opacity 0.2s ease;
+  }
+  .mode-hint.fading { opacity: 0; }
 
   .mode-label {
     font-family: var(--body);
@@ -432,7 +454,7 @@
 
   .output-scroll {
     flex: 1; overflow-y: auto;
-    min-height: 360px; max-height: 560px;
+    min-height: 320px;
   }
 
   .output-scroll::-webkit-scrollbar { width: 4px; }
@@ -879,8 +901,10 @@
 
   .hm-empty {
     padding: 48px 22px; text-align: center;
-    color: var(--muted); font-size: 13px; line-height: 1.6;
+    line-height: 1.6;
   }
+  .hm-empty-title { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
+  .hm-empty-desc { font-size: 12px; color: var(--muted); max-width: 280px; margin: 0 auto; }
 
   .hm-bottom {
     padding: 11px 22px; border-top: 1px solid var(--border);
@@ -898,13 +922,12 @@
 
   /* ── Go Deeper CTA ── */
   .go-deeper-section {
-    display: none;
-    margin-top: 20px;
+    display: none; margin-top: 12px;
     border: 1px solid rgba(201,168,76,0.2);
     border-radius: 18px;
     overflow: hidden;
     background: var(--surface);
-    animation: fadeUp 0.5s ease both;
+    animation: fadeUp 0.4s ease both;
   }
   .go-deeper-section.visible { display: block; }
 
@@ -1152,6 +1175,23 @@
     .mode-grid { grid-template-columns: repeat(3, 1fr); }
     .workspace { grid-template-columns: 1fr; }
     .go-deeper-inner { flex-direction: column; align-items: flex-start; }
+    main { padding-top: 24px; }
+    .hero { margin-bottom: 24px; }
+    .mode-grid { margin-bottom: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 14px 16px; }
+    main { padding-left: 16px; padding-right: 16px; padding-top: 20px; }
+    .logo-name { font-size: 17px; }
+    .hero h1 { font-size: 32px; letter-spacing: -1px; }
+    .hero-eyebrow { margin-bottom: 14px; }
+    .mode-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .panel-header { padding: 11px 14px; }
+    .output-rendered { padding: 16px; }
+    .output-actions { padding: 10px 14px; gap: 6px; }
+    .act-btn { padding: 7px 12px; font-size: 9px; }
+    .shortcut-hint { display: none; }
   }
 </style>
 </head>
@@ -1182,23 +1222,23 @@
 
   <div class="mode-grid">
     <button class="mode-btn active" data-mode="prd" onclick="setMode('prd')">
-      <span class="mode-icon">📋</span>
+      <span class="mode-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
       <span class="mode-label">Full PRD</span>
     </button>
     <button class="mode-btn" data-mode="stories" onclick="setMode('stories')">
-      <span class="mode-icon">📖</span>
+      <span class="mode-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
       <span class="mode-label">User Stories</span>
     </button>
     <button class="mode-btn" data-mode="criteria" onclick="setMode('criteria')">
-      <span class="mode-icon">✅</span>
+      <span class="mode-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
       <span class="mode-label">Acceptance Criteria</span>
     </button>
     <button class="mode-btn" data-mode="metrics" onclick="setMode('metrics')">
-      <span class="mode-icon">📊</span>
+      <span class="mode-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
       <span class="mode-label">Success Metrics</span>
     </button>
     <button class="mode-btn" data-mode="risks" onclick="setMode('risks')">
-      <span class="mode-icon">⚠️</span>
+      <span class="mode-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
       <span class="mode-label">Risks & Assumptions</span>
     </button>
   </div>
@@ -1216,7 +1256,7 @@
       </div>
       <div class="input-body">
         <div class="mode-hint" id="modeHint">Describe your product idea or feature. One sentence is enough to generate a full PRD.</div>
-        <div class="field-label">Your idea</div>
+        <div class="field-label">What are you building?</div>
         <textarea id="inputText" rows="6" placeholder="e.g. A feature that lets merchants set up automatic settlement schedules to their bank accounts..."></textarea>
 
         <div class="context-section">
@@ -1274,6 +1314,7 @@
             <input type="password" class="api-input" id="apiKey" placeholder="sk-ant-..."/>
             <button class="generate-btn" id="generateBtn" onclick="generate()">Generate →</button>
           </div>
+          <div class="shortcut-hint">⌘↵ to generate</div>
         </div>
       </div>
     </div>
@@ -1457,7 +1498,11 @@
   function handleDrop(e) {
     e.preventDefault();
     document.getElementById('uploadZone').classList.remove('drag-over');
-    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    const allFiles = Array.from(e.dataTransfer.files);
+    const validTypes = ['image/png', 'image/jpeg', 'image/webp'];
+    const invalid = allFiles.filter(f => !validTypes.includes(f.type));
+    if (invalid.length) toast(`⚠ ${invalid[0].name} — use PNG, JPG or WebP`);
+    const files = allFiles.filter(f => validTypes.includes(f.type));
     processImageFiles(files);
   }
 
@@ -1607,9 +1652,14 @@
     document.getElementById('editBtn').classList.remove('active');
     document.getElementById('outputEditable').style.display = 'none';
 
-    // Update top mode grid hint/placeholder
-    document.getElementById('modeHint').textContent = modes[mode].hint;
-    document.getElementById('inputText').placeholder = modes[mode].placeholder;
+    // Update top mode grid hint/placeholder with fade
+    const hintEl = document.getElementById('modeHint');
+    hintEl.classList.add('fading');
+    setTimeout(() => {
+      hintEl.textContent = modes[mode].hint;
+      document.getElementById('inputText').placeholder = modes[mode].placeholder;
+      hintEl.classList.remove('fading');
+    }, 150);
     document.getElementById('modeTag').textContent = modeLabels[mode];
     document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
 
@@ -1709,7 +1759,7 @@
       document.getElementById('outputStatus').textContent = 'Ready';
       document.getElementById('goDeeperSection').classList.add('visible');
       document.getElementById('goDeeperBtn').disabled = false;
-      toast(`✓ ${modeNames[mode]} ready`);
+      toast(`✓ ${modeNames[mode]} ready · session saved`);
       if (rememberKey) localStorage.setItem('arc_key', key);
       saveCurrentSession();
 
@@ -1744,13 +1794,16 @@
   }
 
   // ── Generate (main button) ────────────────────────────────────────
+  let _generating = false;
   async function generate() {
+    if (_generating) return;
     const key = document.getElementById('apiKey').value.trim();
     const input = document.getElementById('inputText').value.trim();
     const ctx = document.getElementById('contextText').value.trim();
     if (!key) { toast('⚠ Add your API key first'); return; }
     if (!input) { toast('⚠ Describe your idea first'); return; }
 
+    _generating = true;
     const btn = document.getElementById('generateBtn');
     btn.disabled = true; btn.textContent = 'Generating...';
 
@@ -1762,6 +1815,7 @@
 
     await runGenerate(currentMode, key, input, ctx);
 
+    _generating = false;
     btn.disabled = false; btn.textContent = 'Generate →';
   }
 
@@ -2119,8 +2173,6 @@ Be precise. Only include real, named companies. Surface uncomfortable truths abo
   // ── History ───────────────────────────────────────────────────────
   const HISTORY_KEY = 'arc_history';
   const HISTORY_MAX = 20;
-  const modeLabels = { prd: 'PRD', stories: 'User stories', criteria: 'Acceptance criteria', metrics: 'Metrics', risks: 'Risks' };
-  const modeOrder = ['prd', 'stories', 'criteria', 'metrics', 'risks'];
 
   function loadHistory() {
     try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
@@ -2211,14 +2263,16 @@ Be precise. Only include real, named companies. Surface uncomfortable truths abo
 
     const list = document.getElementById('hmList');
     if (!filtered.length) {
-      list.innerHTML = `<div class="hm-empty">${query ? 'No sessions match your search.' : 'No sessions saved yet. Generate a PRD to start building your history.'}</div>`;
+      list.innerHTML = query
+        ? `<div class="hm-empty"><div class="hm-empty-title">No results</div><div class="hm-empty-desc">No sessions match "${query}". Try a different keyword.</div></div>`
+        : `<div class="hm-empty"><div class="hm-empty-title">No sessions yet</div><div class="hm-empty-desc">Generate your first PRD and it will appear here. Sessions save automatically after each generation.</div></div>`;
       return;
     }
 
     list.innerHTML = filtered.map(entry => {
       const pills = modeOrder.map(m => {
         const done = entry.modes && entry.modes[m];
-        return `<span class="hm-pill${done ? ' done' : ''}">${modeLabels[m]}</span>`;
+        return `<span class="hm-pill${done ? ' done' : ''}">${modeNames[m]}</span>`;
       }).join('');
 
       return `<div class="hm-entry" data-id="${entry.id}">
