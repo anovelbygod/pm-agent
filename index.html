@@ -1702,56 +1702,6 @@ Be precise. Only include real, named companies. Surface uncomfortable truths abo
 </html>
 
   // ── Context ──────────────────────────────────────────────────────
-  function toggleContext() {
-    ctxOpen = !ctxOpen;
-    document.getElementById('ctxInner').classList.toggle('open', ctxOpen);
-    document.getElementById('ctxArrow').classList.toggle('open', ctxOpen);
-  }
-
-  // ── Remember ─────────────────────────────────────────────────────
-  function initRemember() {
-    if (localStorage.getItem('arc_remember') === 'true') {
-      const k = localStorage.getItem('arc_key');
-      if (k) { rememberKey = true; document.getElementById('apiKey').value = k; setToggle(true); }
-    }
-  }
-
-  function toggleRemember() {
-    rememberKey = !rememberKey;
-    setToggle(rememberKey);
-    if (rememberKey) {
-      const k = document.getElementById('apiKey').value.trim();
-      if (k) { localStorage.setItem('arc_key', k); localStorage.setItem('arc_remember', 'true'); toast('✓ Key saved to this device'); }
-      else { toast('⚠ Paste your key first'); rememberKey = false; setToggle(false); }
-    } else { localStorage.removeItem('arc_key'); localStorage.removeItem('arc_remember'); toast('Key removed'); }
-  }
-
-  function setToggle(on) {
-    document.getElementById('rememberToggle').style.background = on ? 'var(--aventurine)' : 'var(--border2)';
-    const t = document.getElementById('toggleThumb');
-    t.style.background = on ? 'var(--bg)' : 'var(--muted)';
-    t.style.left = on ? '17px' : '3px';
-  }
-
-  // ── View ─────────────────────────────────────────────────────────
-  function setView(v) {
-    currentView = v;
-    const scroll = document.getElementById('outputScroll');
-    const editable = document.getElementById('outputEditable');
-    if (v === 'rendered') {
-      currentOutput = editable.value;
-      const r = scroll.querySelector('.output-rendered');
-      if (r) r.innerHTML = md(currentOutput);
-      scroll.style.display = 'block'; editable.style.display = 'none';
-      document.getElementById('viewBtn').classList.add('active');
-      document.getElementById('editBtn').classList.remove('active');
-    } else {
-      editable.value = currentOutput;
-      scroll.style.display = 'none'; editable.style.display = 'block';
-      document.getElementById('editBtn').classList.add('active');
-      document.getElementById('viewBtn').classList.remove('active');
-    }
-  }
 
 </script>
 </body>
