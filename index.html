@@ -535,6 +535,121 @@
   }
   .act-btn-clear:hover { border-color: var(--danger); color: var(--danger); }
 
+  /* Full brief download btn */
+  .act-btn-brief {
+    margin-left: auto;
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.05);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .act-btn-brief:hover { border-color: var(--gold); color: var(--gold-soft); background: rgba(201,168,76,0.1); }
+  .act-btn-brief:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  .brief-count {
+    font-family: var(--mono); font-size: 9px;
+    background: var(--gold); color: var(--bg);
+    border-radius: 10px; padding: 1px 6px; font-weight: 600;
+  }
+
+  /* Mode status tabs inside output panel */
+  .mode-status-bar {
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 6px;
+    background: var(--surface2); flex-wrap: wrap;
+  }
+
+  .mode-status-tab {
+    font-family: var(--mono); font-size: 10px;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--muted); cursor: pointer;
+    display: flex; align-items: center; gap: 5px;
+    transition: all 0.2s; letter-spacing: 0.3px;
+    background: transparent;
+  }
+  .mode-status-tab:hover { border-color: var(--aventurine); color: var(--text2); }
+  .mode-status-tab.tab-active { background: var(--aventurine); border-color: var(--aventurine); color: var(--bg); }
+  .mode-status-tab.tab-ready { border-color: var(--aventurine); color: var(--aventurine-light); background: rgba(74,124,89,0.08); }
+  .mode-status-tab.tab-ready.tab-active { background: var(--aventurine); color: var(--bg); }
+  .mode-status-tab.tab-generating { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); pointer-events: none; }
+
+  .tab-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  .tab-spinner {
+    width: 8px; height: 8px;
+    border: 1.5px solid var(--gold);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: tabSpin 0.7s linear infinite; flex-shrink: 0;
+  }
+  @keyframes tabSpin { to { transform: rotate(360deg); } }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(4,8,5,0.85);
+    z-index: 200; align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 20px; width: 100%; max-width: 460px;
+    margin: 24px; overflow: hidden;
+    animation: fadeUp 0.25s ease both;
+  }
+
+  .modal-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border); }
+  .modal-title { font-family: var(--display); font-size: 17px; font-weight: 700; letter-spacing: -0.3px; color: var(--text); margin-bottom: 4px; }
+  .modal-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .modal-body { padding: 16px 24px; }
+
+  .modal-check-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px; border-radius: 12px; margin-bottom: 7px;
+    border: 1px solid var(--border); cursor: pointer;
+    transition: all 0.2s; background: var(--surface2);
+  }
+  .modal-check-row:hover { border-color: var(--aventurine); }
+  .modal-check-row.checked { border-color: var(--aventurine); background: rgba(74,124,89,0.06); }
+  .modal-check-row.mcr-disabled { opacity: 0.35; cursor: not-allowed; }
+  .modal-check-row.mcr-disabled:hover { border-color: var(--border); }
+
+  .modal-checkbox {
+    width: 17px; height: 17px; border-radius: 5px;
+    border: 1.5px solid var(--border2); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; font-size: 10px; color: var(--bg); font-weight: 700;
+  }
+  .modal-check-row.checked .modal-checkbox { background: var(--aventurine); border-color: var(--aventurine); }
+
+  .modal-check-info { flex: 1; }
+  .modal-check-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .modal-check-status { font-size: 11px; margin-top: 1px; }
+  .mcs-ready { color: var(--aventurine-light); }
+  .mcs-pending { color: var(--muted); opacity: 0.6; }
+
+  .modal-footer {
+    padding: 14px 24px; border-top: 1px solid var(--border);
+    display: flex; gap: 8px; justify-content: flex-end;
+    background: var(--surface2);
+  }
+  .modal-cancel {
+    background: transparent; border: 1px solid var(--border2); border-radius: 10px;
+    padding: 9px 18px; color: var(--muted);
+    font-family: var(--body); font-size: 13px; cursor: pointer;
+  }
+  .modal-cancel:hover { color: var(--text2); }
+  .modal-download {
+    background: var(--aventurine); border: none; border-radius: 10px;
+    padding: 9px 20px; color: var(--bg);
+    font-family: var(--body); font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .modal-download:hover { background: var(--aventurine-light); }
+  .modal-download:disabled { opacity: 0.35; cursor: not-allowed; }
+
   /* ── Go Deeper CTA ── */
   .go-deeper-section {
     display: none;
@@ -899,6 +1014,13 @@
         <div class="toolbar-sep"></div>
         <span class="word-count" id="wordCount"></span>
       </div>
+      <div class="mode-status-bar" id="modeStatusBar">
+        <button class="mode-status-tab tab-active" data-mode="prd" onclick="switchMode('prd')">PRD</button>
+        <button class="mode-status-tab" data-mode="stories" onclick="switchMode('stories')">User stories</button>
+        <button class="mode-status-tab" data-mode="criteria" onclick="switchMode('criteria')">Acceptance criteria</button>
+        <button class="mode-status-tab" data-mode="metrics" onclick="switchMode('metrics')">Metrics</button>
+        <button class="mode-status-tab" data-mode="risks" onclick="switchMode('risks')">Risks</button>
+      </div>
       <div class="output-scroll" id="outputScroll">
         <div class="output-empty">
           <div class="empty-gem">◈</div>
@@ -908,14 +1030,30 @@
       <textarea class="output-editable" id="outputEditable"></textarea>
       <div class="output-actions">
         <button class="act-btn" id="copyBtn" onclick="copyOutput()" disabled>Copy</button>
-        <button class="act-btn" id="dlBtn" onclick="downloadOutput()" disabled>Download .md</button>
+        <button class="act-btn" id="dlBtn" onclick="downloadOutput()" disabled>Download section</button>
         <button class="act-btn act-btn-clear" id="clearBtn" onclick="clearOutput()" disabled>Clear</button>
+        <button class="act-btn act-btn-brief" id="briefBtn" onclick="openBriefModal()" disabled>
+          Download full brief <span class="brief-count" id="briefCount">0</span>
+        </button>
       </div>
     </div>
 
   </div>
 
-  <!-- GO DEEPER CTA — appears after PRD is ready -->
+  <!-- FULL BRIEF MODAL -->
+  <div class="modal-overlay" id="briefModal" onclick="closeBriefModalOutside(event)">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">Download full brief</div>
+        <div class="modal-sub">Select sections to include. Only generated sections can be downloaded.</div>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="modal-cancel" onclick="closeBriefModal()">Cancel</button>
+        <button class="modal-download" id="modalDownloadBtn" onclick="downloadBrief()">Download <span id="modalCount">0</span> sections →</button>
+      </div>
+    </div>
+  </div>
   <div class="go-deeper-section" id="goDeeperSection">
     <div class="go-deeper-inner">
       <div class="go-deeper-left">
@@ -961,7 +1099,560 @@
 <script>
   // ── State ────────────────────────────────────────────────────────
   let ctxOpen = false, rememberKey = false, currentView = 'rendered';
-  let currentMode = 'prd', currentOutput = '', currentIntel = '';
+  let currentMode = 'prd', currentIntel = '';
+
+  // Per-mode output cache: { prd: {text, words}, stories: {text, words}, ... }
+  const modeCache = { prd: null, stories: null, criteria: null, metrics: null, risks: null };
+
+  // Convenience: get/set current mode's cached text
+  function getCurrent() { return modeCache[currentMode] ? modeCache[currentMode].text : ''; }
+  function setCurrent(text) {
+    const words = text.split(/\s+/).filter(Boolean).length;
+    modeCache[currentMode] = { text, words };
+  }
+
+  // ── Context ──────────────────────────────────────────────────────
+  function toggleContext() {
+    ctxOpen = !ctxOpen;
+    document.getElementById('ctxInner').classList.toggle('open', ctxOpen);
+    document.getElementById('ctxArrow').classList.toggle('open', ctxOpen);
+  }
+
+  // ── Remember ─────────────────────────────────────────────────────
+  function initRemember() {
+    if (localStorage.getItem('arc_remember') === 'true') {
+      const k = localStorage.getItem('arc_key');
+      if (k) { rememberKey = true; document.getElementById('apiKey').value = k; setToggle(true); }
+    }
+  }
+
+  function toggleRemember() {
+    rememberKey = !rememberKey;
+    setToggle(rememberKey);
+    if (rememberKey) {
+      const k = document.getElementById('apiKey').value.trim();
+      if (k) { localStorage.setItem('arc_key', k); localStorage.setItem('arc_remember', 'true'); toast('✓ Key saved to this device'); }
+      else { toast('⚠ Paste your key first'); rememberKey = false; setToggle(false); }
+    } else { localStorage.removeItem('arc_key'); localStorage.removeItem('arc_remember'); toast('Key removed'); }
+  }
+
+  function setToggle(on) {
+    document.getElementById('rememberToggle').style.background = on ? 'var(--aventurine)' : 'var(--border2)';
+    const t = document.getElementById('toggleThumb');
+    t.style.background = on ? 'var(--bg)' : 'var(--muted)';
+    t.style.left = on ? '17px' : '3px';
+  }
+
+  // ── View ─────────────────────────────────────────────────────────
+  function setView(v) {
+    currentView = v;
+    const scroll = document.getElementById('outputScroll');
+    const editable = document.getElementById('outputEditable');
+    if (v === 'rendered') {
+      const saved = editable.value;
+      if (saved) { setCurrent(saved); modeCache[currentMode].text = saved; }
+      const r = scroll.querySelector('.output-rendered');
+      if (r) r.innerHTML = md(getCurrent());
+      scroll.style.display = 'block'; editable.style.display = 'none';
+      document.getElementById('viewBtn').classList.add('active');
+      document.getElementById('editBtn').classList.remove('active');
+    } else {
+      editable.value = getCurrent();
+      scroll.style.display = 'none'; editable.style.display = 'block';
+      document.getElementById('editBtn').classList.add('active');
+      document.getElementById('viewBtn').classList.remove('active');
+    }
+  }
+
+  // ── Mode status tabs ──────────────────────────────────────────────
+  const modeNames = { prd: 'PRD', stories: 'User stories', criteria: 'Acceptance criteria', metrics: 'Metrics', risks: 'Risks' };
+  const modeLabels = { prd: 'PRD', stories: 'Stories', criteria: 'Criteria', metrics: 'Metrics', risks: 'Risks' };
+
+  function updateStatusTabs(generatingMode) {
+    document.querySelectorAll('.mode-status-tab').forEach(tab => {
+      const m = tab.dataset.mode;
+      tab.className = 'mode-status-tab';
+      if (m === currentMode) tab.classList.add('tab-active');
+      if (m === generatingMode) {
+        tab.classList.add('tab-generating');
+        tab.innerHTML = `<div class="tab-spinner"></div> ${modeNames[m]}`;
+      } else if (modeCache[m]) {
+        tab.classList.add('tab-ready');
+        tab.innerHTML = `<span class="tab-dot"></span> ${modeNames[m]}`;
+      } else {
+        tab.innerHTML = modeNames[m];
+      }
+    });
+    updateBriefCount();
+  }
+
+  function updateBriefCount() {
+    const count = Object.values(modeCache).filter(Boolean).length;
+    document.getElementById('briefCount').textContent = count;
+    document.getElementById('briefBtn').disabled = count === 0;
+  }
+
+  // ── switchMode — auto-generate if not cached ──────────────────────
+  async function switchMode(mode) {
+    if (mode === currentMode) return;
+
+    // Save any edits to current mode before switching
+    if (currentView === 'edit') {
+      const val = document.getElementById('outputEditable').value;
+      if (val && modeCache[currentMode]) modeCache[currentMode].text = val;
+    }
+
+    currentMode = mode;
+    currentView = 'rendered';
+    document.getElementById('viewBtn').classList.add('active');
+    document.getElementById('editBtn').classList.remove('active');
+    document.getElementById('outputEditable').style.display = 'none';
+
+    // Update top mode grid hint/placeholder
+    document.getElementById('modeHint').textContent = modes[mode].hint;
+    document.getElementById('inputText').placeholder = modes[mode].placeholder;
+    document.getElementById('modeTag').textContent = modeLabels[mode];
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+
+    // If already cached — just show it
+    if (modeCache[mode]) {
+      renderOutput(modeCache[mode].text, modeCache[mode].words);
+      updateStatusTabs(null);
+      return;
+    }
+
+    // Not cached — need input to auto-generate
+    const key = document.getElementById('apiKey').value.trim();
+    const input = document.getElementById('inputText').value.trim();
+    const ctx = document.getElementById('contextText').value.trim();
+    if (!key || !input) {
+      // Nothing generated yet at all — just reset to empty
+      showEmpty();
+      updateStatusTabs(null);
+      return;
+    }
+
+    // Auto-generate
+    await runGenerate(mode, key, input, ctx);
+  }
+
+  // ── Modes ─────────────────────────────────────────────────────────
+  const modes = {
+    prd: {
+      hint: "Describe your product idea or feature. One sentence is enough to generate a full PRD.",
+      placeholder: "e.g. A feature that lets merchants set up automatic settlement schedules to their bank accounts on a daily, weekly, or custom frequency...",
+      prompt: (i, c) => `You are a senior product manager. Generate a comprehensive PRD in markdown for:\n\n"${i}"\n${c?`\n**Context:**\n${c}\n`:''}\n## Problem Statement\n## Goals\n## Non-Goals (v1)\n## User Personas\n## Proposed Solution\n## Key Features\n## User Flow\n## Success Metrics\n## Risks & Assumptions\n## Open Questions\n\nBe specific and practical. Write as if handing directly to an engineering team.`
+    },
+    stories: {
+      hint: "Describe an epic or feature. Get properly formatted user stories ready for your backlog.",
+      placeholder: "e.g. Bulk transfer feature that lets merchants pay multiple recipients in one operation...",
+      prompt: (i, c) => `You are a senior product manager. Break down this epic into user stories in markdown:\n\n"${i}"\n${c?`\n**Context:**\n${c}\n`:''}\nFormat: **Story [n]: [Title]**\nAs a [user], I want [action], so that [outcome].\n\n**Acceptance Criteria:**\n- [ ] Given... When... Then...\n\nCover happy path, edge cases, errors. Aim for 5–8 stories.`
+    },
+    criteria: {
+      hint: "Paste a user story or feature. Get detailed acceptance criteria covering all cases.",
+      placeholder: "e.g. As a merchant, I want to filter my transaction history by date range so I can reconcile accounts...",
+      prompt: (i, c) => `You are a senior product manager. Write detailed acceptance criteria in markdown for:\n\n"${i}"\n${c?`\n**Context:**\n${c}\n`:''}\n## Acceptance Criteria\n### Happy Path\n- [ ] Given... When... Then...\n### Edge Cases\n- [ ] Given... When... Then...\n### Error States\n- [ ] Given... When... Then...\n### Non-functional Requirements\n- [ ] Performance, security, accessibility\n\nThink like a QA engineer.`
+    },
+    metrics: {
+      hint: "Describe a feature or goal. Get leading and lagging metrics with measurement guidance.",
+      placeholder: "e.g. Increase merchant activation rate in the first 7 days after sign-up...",
+      prompt: (i, c) => `You are a senior PM with analytics expertise. Suggest success metrics in markdown for:\n\n"${i}"\n${c?`\n**Context:**\n${c}\n`:''}\n## Success Metrics\n### Primary Metric (North Star)\n### Leading Indicators\n### Lagging Indicators\n### Guardrail Metrics\n### How to Measure\n### Targets & Benchmarks\n\nBe specific. No vanity metrics.`
+    },
+    risks: {
+      hint: "Describe a feature or initiative. Get a structured risk register ready for stakeholder review.",
+      placeholder: "e.g. Launching an instant settlement feature for enterprise merchants processing over ₦1B daily...",
+      prompt: (i, c) => `You are a senior product manager. Generate a risks and assumptions register in markdown for:\n\n"${i}"\n${c?`\n**Context:**\n${c}\n`:''}\n## Risks & Assumptions Register\n### Key Assumptions\n### Technical Risks\n| Risk | Likelihood | Impact | Mitigation |\n|------|------------|--------|------------|\n### Business Risks\n| Risk | Likelihood | Impact | Mitigation |\n|------|------------|--------|------------|\n### User/Adoption Risks\n| Risk | Likelihood | Impact | Mitigation |\n|------|------------|--------|------------|\n### Regulatory & Compliance Risks\n| Risk | Likelihood | Impact | Mitigation |\n|------|------------|--------|------------|\n### Open Questions\n\nSurface the uncomfortable risks.`
+    }
+  };
+
+  function setMode(mode) {
+    // Top mode grid buttons — now delegates to switchMode
+    switchMode(mode);
+  }
+
+  // ── Core generate runner (shared by generate() and switchMode()) ───
+  async function runGenerate(mode, key, input, ctx) {
+    const scroll = document.getElementById('outputScroll');
+    const editable = document.getElementById('outputEditable');
+
+    scroll.style.display = 'block'; editable.style.display = 'none';
+    document.getElementById('outputDot').classList.add('live');
+    document.getElementById('outputStatus').textContent = 'Generating';
+    scroll.innerHTML = `<div class="loading"><div class="loading-gem"></div><div class="loading-text">crafting ${modeNames[mode].toLowerCase()}</div></div>`;
+    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn','briefBtn'].forEach(id => document.getElementById(id).disabled = true);
+    updateStatusTabs(mode);
+
+    try {
+      const res = await fetch('/.netlify/functions/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': key },
+        body: JSON.stringify({ prompt: modes[mode].prompt(input, ctx), model: 'claude-haiku-4-5-20251001' })
+      });
+      const data = await res.json();
+      if (data.error) {
+        scroll.innerHTML = `<div class="output-empty"><div class="empty-gem">!</div><div class="empty-text" style="color:var(--danger)">${data.error.message||'API error'}</div></div>`;
+        document.getElementById('outputStatus').textContent = 'Error';
+        updateStatusTabs(null);
+        return;
+      }
+
+      const text = data.content[0].text;
+      // Save to cache under the mode that was requested (not currentMode — user may have switched)
+      const words = text.split(/\s+/).filter(Boolean).length;
+      modeCache[mode] = { text, words };
+
+      // Only render if this is still the active mode
+      if (mode === currentMode) {
+        renderOutput(text, words);
+      }
+
+      updateStatusTabs(null);
+      document.getElementById('outputStatus').textContent = 'Ready';
+      document.getElementById('goDeeperSection').classList.add('visible');
+      document.getElementById('goDeeperBtn').disabled = false;
+      toast(`✓ ${modeNames[mode]} ready`);
+      if (rememberKey) localStorage.setItem('arc_key', key);
+
+    } catch(err) {
+      scroll.innerHTML = `<div class="output-empty"><div class="empty-gem">!</div><div class="empty-text" style="color:var(--danger)">Something went wrong. Check your API key.</div></div>`;
+      document.getElementById('outputStatus').textContent = 'Error';
+      updateStatusTabs(null);
+    }
+  }
+
+  function renderOutput(text, words) {
+    const scroll = document.getElementById('outputScroll');
+    const editable = document.getElementById('outputEditable');
+    scroll.innerHTML = `<div class="output-rendered">${md(text)}</div>`;
+    scroll.style.display = 'block'; editable.style.display = 'none';
+    editable.value = text;
+    document.getElementById('wordCount').textContent = words + ' words';
+    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = false);
+    updateBriefCount();
+    currentView = 'rendered';
+    document.getElementById('viewBtn').classList.add('active');
+    document.getElementById('editBtn').classList.remove('active');
+  }
+
+  function showEmpty() {
+    const scroll = document.getElementById('outputScroll');
+    scroll.innerHTML = `<div class="output-empty"><div class="empty-gem">◈</div><div class="empty-text">Your documentation will appear here after generation.</div></div>`;
+    document.getElementById('wordCount').textContent = '';
+    document.getElementById('outputStatus').textContent = 'Waiting';
+    document.getElementById('outputDot').classList.remove('live');
+    ['copyBtn','dlBtn','clearBtn','viewBtn','editBtn'].forEach(id => document.getElementById(id).disabled = true);
+  }
+
+  // ── Generate (main button) ────────────────────────────────────────
+  async function generate() {
+    const key = document.getElementById('apiKey').value.trim();
+    const input = document.getElementById('inputText').value.trim();
+    const ctx = document.getElementById('contextText').value.trim();
+    if (!key) { toast('⚠ Add your API key first'); return; }
+    if (!input) { toast('⚠ Describe your idea first'); return; }
+
+    const btn = document.getElementById('generateBtn');
+    btn.disabled = true; btn.textContent = 'Generating...';
+
+    // Clear all caches on a fresh generate
+    Object.keys(modeCache).forEach(k => modeCache[k] = null);
+    currentIntel = '';
+    document.getElementById('goDeeperSection').classList.remove('visible');
+    document.getElementById('intelPanel').classList.remove('visible');
+
+    await runGenerate(currentMode, key, input, ctx);
+
+    btn.disabled = false; btn.textContent = 'Generate →';
+  }
+
+  // ── Go Deeper ─────────────────────────────────────────────────────
+  async function goDeeper() {
+    const key = document.getElementById('apiKey').value.trim();
+    if (!key) { toast('⚠ Add your API key first'); return; }
+    const prdText = modeCache['prd'] ? modeCache['prd'].text : getCurrent();
+    if (!prdText) { toast('⚠ Generate a PRD first'); return; }
+
+    const btn = document.getElementById('goDeeperBtn');
+    btn.disabled = true; btn.textContent = 'Researching...';
+
+    const intelPanel = document.getElementById('intelPanel');
+    const intelBody = document.getElementById('intelBody');
+    intelPanel.classList.add('visible');
+    intelBody.innerHTML = `<div class="loading"><div class="loading-gem-gold"></div><div class="loading-text">mapping the landscape</div></div>`;
+    document.getElementById('intelStatus').textContent = 'Researching';
+    document.getElementById('intelDot').className = 'status-dot gold';
+    ['intelCopyBtn','intelDlBtn'].forEach(id => document.getElementById(id).disabled = true);
+    intelPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const prompt = `You are a senior product strategist and competitive intelligence expert. Based on the following PRD, identify and analyse the competitive landscape.
+
+PRD:
+${prdText}
+
+Generate a competitive intelligence brief in markdown with the following structure:
+
+# Competitive Intelligence Brief
+
+## Overview
+A 2-3 sentence summary of the competitive landscape for this idea.
+
+## Named Competitors
+
+For each competitor (aim for 4-6), use this format:
+
+### [Competitor Name]
+**What they do:** One clear sentence on their core product.
+**Target market:** Who they serve.
+**How they position:** Their key differentiator or angle.
+**Perceived gap:** What they don't do well or who they underserve — this is the opening.
+**Website:** [company.com](https://company.com)
+
+---
+
+## Comparison Table
+
+| Company | Target Market | Key Strength | Notable Gap | Pricing Model |
+|---------|---------------|--------------|-------------|---------------|
+[Fill in rows for each competitor]
+
+## Where the Opportunity Lives
+2-3 sentences on the differentiator angle based on the gaps identified. Be specific and actionable — tell the PM where to position.
+
+Be precise. Only include real, named companies. Surface uncomfortable truths about the competitive landscape.`;
+
+    try {
+      const res = await fetch('/.netlify/functions/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': key },
+        body: JSON.stringify({ prompt, model: 'claude-haiku-4-5-20251001' })
+      });
+      const data = await res.json();
+      if (data.error) {
+        intelBody.innerHTML = `<div class="output-empty"><div class="empty-gem">!</div><div class="empty-text" style="color:var(--danger)">${data.error.message||'API error'}</div></div>`;
+        document.getElementById('intelStatus').textContent = 'Error';
+        return;
+      }
+      currentIntel = data.content[0].text;
+      intelBody.innerHTML = mdIntel(currentIntel);
+      document.getElementById('intelStatus').textContent = 'Ready';
+      ['intelCopyBtn','intelDlBtn'].forEach(id => document.getElementById(id).disabled = false);
+      toast('✓ Competitive brief ready');
+      if (rememberKey) localStorage.setItem('arc_key', key);
+    } catch(err) {
+      intelBody.innerHTML = `<div class="output-empty"><div class="empty-gem">!</div><div class="empty-text" style="color:var(--danger)">Something went wrong. Check your API key.</div></div>`;
+      document.getElementById('intelStatus').textContent = 'Error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Research Competitors →';
+    }
+  }
+
+  // ── Markdown ──────────────────────────────────────────────────────
+  function md(text) {
+    const lines = text.split('\n');
+    let html = '', list = false, table = false, thead = false;
+    for (let line of lines) {
+      if (line.startsWith('|')) {
+        if (!table) { html += '<table>'; table = true; thead = true; }
+        if (/^[\|\s\-:]+$/.test(line)) { thead = false; continue; }
+        const cells = line.split('|').filter(c => c.trim());
+        const tag = thead ? 'th' : 'td';
+        html += '<tr>' + cells.map(c => `<${tag}>${inl(c.trim())}</${tag}>`).join('') + '</tr>';
+        continue;
+      } else if (table) { html += '</table>'; table = false; }
+      if (line.startsWith('### ')) { if (list) { html += '</ul>'; list = false; } html += `<h3>${inl(line.slice(4))}</h3>`; continue; }
+      if (line.startsWith('## ')) { if (list) { html += '</ul>'; list = false; } html += `<h2>${inl(line.slice(3))}</h2>`; continue; }
+      if (line.startsWith('# ')) { if (list) { html += '</ul>'; list = false; } html += `<h1>${inl(line.slice(2))}</h1>`; continue; }
+      if (/^---+$/.test(line)) { if (list) { html += '</ul>'; list = false; } html += '<hr/>'; continue; }
+      if (/^- \[ \] /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li><span class="cb">☐</span>${inl(line.slice(6))}</li>`; continue; }
+      if (/^- /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inl(line.slice(2))}</li>`; continue; }
+      if (/^\d+\. /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inl(line.replace(/^\d+\. /,''))}</li>`; continue; }
+      if (list) { html += '</ul>'; list = false; }
+      if (!line.trim()) continue;
+      html += `<p>${inl(line)}</p>`;
+    }
+    if (list) html += '</ul>';
+    if (table) html += '</table>';
+    return html;
+  }
+
+  function mdIntel(text) {
+    const lines = text.split('\n');
+    let html = '', list = false, table = false, thead = false;
+    for (let line of lines) {
+      if (line.startsWith('|')) {
+        if (!table) { html += '<table>'; table = true; thead = true; }
+        if (/^[\|\s\-:]+$/.test(line)) { thead = false; continue; }
+        const cells = line.split('|').filter(c => c.trim());
+        const tag = thead ? 'th' : 'td';
+        html += '<tr>' + cells.map(c => `<${tag}>${inlLink(c.trim())}</${tag}>`).join('') + '</tr>';
+        continue;
+      } else if (table) { html += '</table>'; table = false; }
+      if (line.startsWith('### ')) { if (list) { html += '</ul>'; list = false; } html += `<h3>${inlLink(line.slice(4))}</h3>`; continue; }
+      if (line.startsWith('## ')) { if (list) { html += '</ul>'; list = false; } html += `<h2>${inlLink(line.slice(3))}</h2>`; continue; }
+      if (line.startsWith('# ')) { if (list) { html += '</ul>'; list = false; } html += `<h1>${inlLink(line.slice(2))}</h1>`; continue; }
+      if (/^---+$/.test(line)) { if (list) { html += '</ul>'; list = false; } html += '<hr/>'; continue; }
+      if (/^- \[ \] /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li><span class="cb">☐</span>${inlLink(line.slice(6))}</li>`; continue; }
+      if (/^- /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inlLink(line.slice(2))}</li>`; continue; }
+      if (/^\d+\. /.test(line)) { if (!list) { html += '<ul>'; list = true; } html += `<li>${inlLink(line.replace(/^\d+\. /,''))}</li>`; continue; }
+      if (list) { html += '</ul>'; list = false; }
+      if (!line.trim()) continue;
+      html += `<p>${inlLink(line)}</p>`;
+    }
+    if (list) html += '</ul>';
+    if (table) html += '</table>';
+    return html;
+  }
+
+  function inl(t) {
+    return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/`([^`]+)`/g,'<code>$1</code>');
+  }
+
+  function inlLink(t) {
+    return t
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/`([^`]+)`/g,'<code>$1</code>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1 ↗</a>');
+  }
+
+  // ── Actions ───────────────────────────────────────────────────────
+  function latest() {
+    if (currentView === 'edit') {
+      const val = document.getElementById('outputEditable').value;
+      if (modeCache[currentMode]) modeCache[currentMode].text = val;
+    }
+    return getCurrent();
+  }
+
+  function copyOutput() { const o = latest(); if (!o) return; navigator.clipboard.writeText(o); toast('✓ Copied'); }
+
+  function downloadOutput() {
+    const o = latest(); if (!o) return;
+    const n = { prd:'PRD', stories:'User-Stories', criteria:'Acceptance-Criteria', metrics:'Success-Metrics', risks:'Risks-Assumptions' };
+    const blob = new Blob([o], { type:'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `Arcspect-${n[currentMode]}-${Date.now()}.md`; a.click();
+    URL.revokeObjectURL(url); toast('✓ Downloaded');
+  }
+
+  function clearOutput() {
+    Object.keys(modeCache).forEach(k => modeCache[k] = null);
+    currentIntel = '';
+    showEmpty();
+    document.getElementById('outputEditable').value = '';
+    currentView = 'rendered';
+    document.getElementById('viewBtn').classList.add('active');
+    document.getElementById('editBtn').classList.remove('active');
+    document.getElementById('goDeeperSection').classList.remove('visible');
+    document.getElementById('intelPanel').classList.remove('visible');
+    updateStatusTabs(null);
+    updateBriefCount();
+  }
+
+  function copyIntel() { if (!currentIntel) return; navigator.clipboard.writeText(currentIntel); toast('✓ Brief copied'); }
+
+  function downloadIntel() {
+    if (!currentIntel) return;
+    const blob = new Blob([currentIntel], { type:'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `Arcspect-Competitive-Intelligence-${Date.now()}.md`; a.click();
+    URL.revokeObjectURL(url); toast('✓ Brief downloaded');
+  }
+
+  // ── Full Brief Modal ──────────────────────────────────────────────
+  const modeOrder = ['prd','stories','criteria','metrics','risks'];
+  const modeFull = { prd:'Full PRD', stories:'User stories', criteria:'Acceptance criteria', metrics:'Success metrics', risks:'Risks & assumptions' };
+  let modalSelections = {};
+
+  function openBriefModal() {
+    // Build modal rows
+    const body = document.getElementById('modalBody');
+    modalSelections = {};
+    body.innerHTML = '';
+    modeOrder.forEach(m => {
+      const cached = modeCache[m];
+      const isReady = !!cached;
+      if (isReady) modalSelections[m] = true;
+      const row = document.createElement('div');
+      row.className = 'modal-check-row' + (isReady ? ' checked' : ' mcr-disabled');
+      row.dataset.mode = m;
+      row.innerHTML = `
+        <div class="modal-checkbox">${isReady ? '✓' : ''}</div>
+        <div class="modal-check-info">
+          <div class="modal-check-name">${modeFull[m]}</div>
+          <div class="modal-check-status ${isReady ? 'mcs-ready' : 'mcs-pending'}">
+            ${isReady ? `Ready — ${cached.words} words` : 'Not yet generated'}
+          </div>
+        </div>`;
+      if (isReady) {
+        row.addEventListener('click', () => toggleModalRow(m, row));
+      }
+      body.appendChild(row);
+    });
+    updateModalBtn();
+    document.getElementById('briefModal').classList.add('open');
+  }
+
+  function toggleModalRow(mode, row) {
+    modalSelections[mode] = !modalSelections[mode];
+    row.classList.toggle('checked', modalSelections[mode]);
+    row.querySelector('.modal-checkbox').textContent = modalSelections[mode] ? '✓' : '';
+    updateModalBtn();
+  }
+
+  function updateModalBtn() {
+    const count = Object.values(modalSelections).filter(Boolean).length;
+    document.getElementById('modalCount').textContent = count;
+    document.getElementById('modalDownloadBtn').disabled = count === 0;
+  }
+
+  function closeBriefModal() { document.getElementById('briefModal').classList.remove('open'); }
+
+  function closeBriefModalOutside(e) { if (e.target === document.getElementById('briefModal')) closeBriefModal(); }
+
+  function downloadBrief() {
+    const sections = [];
+    const labels = { prd:'Full PRD', stories:'User Stories', criteria:'Acceptance Criteria', metrics:'Success Metrics', risks:'Risks & Assumptions' };
+    modeOrder.forEach(m => {
+      if (modalSelections[m] && modeCache[m]) {
+        sections.push(`# ${labels[m]}\n\n${modeCache[m].text}`);
+      }
+    });
+    if (!sections.length) return;
+    const combined = sections.join('\n\n---\n\n');
+    const blob = new Blob([combined], { type:'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `Arcspect-Full-Brief-${Date.now()}.md`; a.click();
+    URL.revokeObjectURL(url);
+    closeBriefModal();
+    toast(`✓ Full brief downloaded — ${sections.length} sections`);
+  }
+
+  // ── Toast ──────────────────────────────────────────────────────────
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────
+  window.addEventListener('DOMContentLoaded', () => {
+    initRemember();
+    updateStatusTabs(null);
+    document.getElementById('apiKey').addEventListener('input', () => {
+      if (rememberKey) localStorage.setItem('arc_key', document.getElementById('apiKey').value);
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey||e.ctrlKey) && e.key==='Enter') generate();
+    if (e.key === 'Escape') closeBriefModal();
+  });
+</script>
+</body>
+</html>
 
   // ── Context ──────────────────────────────────────────────────────
   function toggleContext() {
